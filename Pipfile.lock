@@ -18,8 +18,7 @@
     "default": {
         "bitarray": {
             "hashes": [
-                "sha256:050cd30b810ddb3aa941e7ddfbe0d8065e793012d0a88cb5739ec23624b9895e",
-                "sha256:fbc0d5929a1b757e1641abf6571f2d06e76591e89d0ab1b80ebecbd69807914e"
+                "sha256:050cd30b810ddb3aa941e7ddfbe0d8065e793012d0a88cb5739ec23624b9895e"
             ],
             "index": "pypi",
             "version": "==0.8.3"
