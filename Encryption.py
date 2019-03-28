@@ -4,6 +4,7 @@ import math
 
 
 class Encryption:
+
     @staticmethod
     def encrypt(message, key, difficulty=2):
         cypher = bitarray()
