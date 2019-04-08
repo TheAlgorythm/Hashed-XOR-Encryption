@@ -12,9 +12,8 @@ class Encryption:
         blockSize = int(keyLength / difficulty)
         blocks = Encryption.sliceToBlocks(message, blockSize)
         for block in blocks:
-            newKey = Encryption.keyDerivation(key, keyLength)
-            Encryption.addToList(cypher, block ^ newKey[:block.length() * difficulty:difficulty])
-            key = newKey
+            key = Encryption.keyDerivation(key, keyLength)
+            Encryption.addToList(cypher, block ^ key[:block.length() * difficulty:difficulty])
         return cypher
     
     @staticmethod
