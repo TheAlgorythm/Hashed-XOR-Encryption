@@ -17,9 +17,9 @@ class Encryption:
         blocks = Encryption.sliceToBlocks(message, blockSize)
         for block in blocks:
             key = Encryption.keyDerivation(key, salt, keyLength)
-            Encryption.addToList(cypher, block ^ key[:block.length() * difficulty:difficulty])
+            cypher.extend(block ^ key[:block.length() * difficulty:difficulty])
         return cypher
-    
+
     @staticmethod
     def sliceToBlocks(iterList: bitarray, blockSize: int) -> list:
         blocks = list()
@@ -36,12 +36,6 @@ class Encryption:
     def keyDerivation(oldKey: bitarray, salt: bitarray, length: int) -> bitarray:
         newKey = bitarray()
         saltedKey = oldKey
-        Encryption.addToList(saltedKey, salt)
+        saltedKey.extend(salt)
         newKey.frombytes(hashlib.md5(saltedKey.tobytes()).digest())
         return newKey
-
-    @staticmethod
-    def addToList(iterList, appending):
-        for item in appending:
-            iterList.append(item)
-
