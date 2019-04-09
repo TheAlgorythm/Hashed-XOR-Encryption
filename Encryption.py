@@ -1,13 +1,16 @@
 from bitarray import bitarray
 import hashlib
 import math
+import secrets
 
 
 class Encryption:
 
+    _keyLength = 128
+
     @staticmethod
     def encrypt(message: bitarray, key: bitarray, difficulty=2) -> bitarray:
-        keyLength = 128
+        keyLength = Encryption._keyLength
         salt = bitarray()
         if key.length() > keyLength:
             salt = key[keyLength + 1:]
@@ -39,3 +42,10 @@ class Encryption:
         saltedKey.extend(salt)
         newKey.frombytes(hashlib.md5(saltedKey.tobytes()).digest())
         return newKey
+
+    @staticmethod
+    def generateKey(saltSize: int) -> bitarray:
+        key = bitarray()
+        key.frombytes(secrets.token_bytes(Encryption._keyLength + saltSize))
+        return key
+

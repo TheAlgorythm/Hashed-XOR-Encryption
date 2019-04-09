@@ -8,16 +8,31 @@ class App:
 
     @staticmethod
     def argumentParser():
-        parser = argparse.ArgumentParser(description='Encrypt/Decrypt Files')
+        parser = argparse.ArgumentParser(description='Hashed XOR Encryption')
 
-        parser.add_argument('Sourcefile', type=argparse.FileType('rb'))
-        parser.add_argument('Keyfile', type=argparse.FileType('rb'))
-        parser.add_argument('Destinationfile', type=argparse.FileType('wb'))
+        subparsers = parser.add_subparsers(title="commands", dest="command")
+        cryptParser = subparsers.add_parser("Crypt", help="Encrypt/Decrypt Files")
 
-        return parser
+        cryptParser.add_argument('Sourcefile', type=argparse.FileType('rb'))
+        cryptParser.add_argument('Keyfile', type=argparse.FileType('rb'))
+        cryptParser.add_argument('Destinationfile', type=argparse.FileType('wb'))
+
+        generateParser = subparsers.add_parser("Generate", help="Generate Keyfile")
+
+        generateParser.add_argument('Keyfile', type=argparse.FileType('wb'))
+        generateParser.add_argument('Saltsize', type=int)
+
+        return parser.parse_args()
 
     @staticmethod
     def exec(argv):
+        if argv.command == "Crypt":
+            App.crypt(argv)
+        elif argv.command == "Generate":
+            App.generate(argv)
+    
+    @staticmethod
+    def crypt(argv):
         message = bitarray()
         with argv.Sourcefile as fh:
             message.fromfile(fh)
@@ -35,9 +50,15 @@ class App:
 
         with argv.Destinationfile as fh:
             encrypted.tofile(fh)
+    
+    @staticmethod
+    def generate(argv):
+        key = Encryption.generateKey(argv.Saltsize)
+
+        with argv.Keyfile as fh:
+            key.tofile(fh)
 
 
 if __name__ == '__main__':
-    parser = App.argumentParser()
-    args = parser.parse_args()
+    args = App.argumentParser()
     App.exec(args)
