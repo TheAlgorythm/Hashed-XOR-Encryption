@@ -1,6 +1,9 @@
 # Hashed-XOR-Encryption
 
-For Testing:<br>
+## Usage
+
+
+## For Testing:
 <pre><code>$ pipenv install
 $ pipenv run python App.py Crypt lorem.txt first.key encrypted.crypt
 $ pipenv run python App.py Crypt encrypted.crypt first.key decrypted.txt
