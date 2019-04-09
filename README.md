@@ -1,5 +1,7 @@
 # Hashed-XOR-Encryption
 
+The concept behind this encryption you can find [here](Concept.md).
+
 ## Usage
 
 ```shell
