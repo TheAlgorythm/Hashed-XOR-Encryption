@@ -1,5 +1,7 @@
 # Concept
 
+## Python like Pseudo-Code
+
 ```python
 def encrypt(message, key, difficulty=2):
   for block in message:

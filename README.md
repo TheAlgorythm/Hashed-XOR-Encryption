@@ -1,6 +1,7 @@
 # Hashed-XOR-Encryption
 
 ## Usage
+
 ```shell
 usage: App.py [-h] {Crypt,Generate} ...
 
@@ -18,9 +19,12 @@ commands:
 ```
 
 ## For Testing:
-<pre><code>$ pipenv install
+
+```shell
+$ pipenv install
 $ pipenv run python App.py Crypt lorem.txt first.key encrypted.crypt
 $ pipenv run python App.py Crypt encrypted.crypt first.key decrypted.txt
-$ nano decrypted.txt</code></pre>
+$ nano decrypted.txt
+```
 
 To generate and diff test files you can use my tool [FileSet](https://github.com/TheAlgorythm/FileSet).
