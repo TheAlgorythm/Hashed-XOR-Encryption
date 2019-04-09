@@ -35,7 +35,7 @@ class Encryption:
     @staticmethod
     def keyDerivation(oldKey: bitarray, salt: bitarray, length: int) -> bitarray:
         newKey = bitarray()
-        saltedKey = bitarray(oldKey)
+        saltedKey = oldKey
         Encryption.addToList(saltedKey, salt)
         newKey.frombytes(hashlib.md5(saltedKey.tobytes()).digest())
         return newKey
