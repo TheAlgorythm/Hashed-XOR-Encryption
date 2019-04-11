@@ -48,4 +48,3 @@ class Encryption:
         key = bitarray()
         key.frombytes(secrets.token_bytes(Encryption._keyLength + saltSize))
         return key
-
