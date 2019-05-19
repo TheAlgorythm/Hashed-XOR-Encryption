@@ -30,7 +30,7 @@ class App:
             App.crypt(argv)
         elif argv.command == "Generate":
             App.generate(argv)
-    
+
     @staticmethod
     def crypt(argv):
         message = bitarray()
@@ -40,7 +40,7 @@ class App:
         key = bitarray()
         with argv.Keyfile as fh:
             key.fromfile(fh)
-        
+
         start_time = datetime.now()
 
         encrypted = Encryption.encrypt(message, key)
@@ -50,7 +50,7 @@ class App:
 
         with argv.Destinationfile as fh:
             encrypted.tofile(fh)
-    
+
     @staticmethod
     def generate(argv):
         key = Encryption.generateKey(argv.Saltsize)

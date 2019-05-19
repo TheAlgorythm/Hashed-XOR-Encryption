@@ -11,16 +11,21 @@ class Encryption:
     @staticmethod
     def encrypt(message: bitarray, key: bitarray, difficulty=2) -> bitarray:
         keyLength = Encryption._keyLength
-        salt = bitarray()
-        if key.length() > keyLength:
-            salt = key[keyLength + 1:]
-            key = key[:keyLength]
+        iteratorKey = bitarray()
+        iteratorSalt = bitarray()
+        blockSalt = bitarray()
+        if key.length() > keyLength + 2:
+            iteratorSalt = key[keyLength + 1::2]
+            blockSalt = key[keyLength + 2::2]
+            iteratorKey = key[:keyLength]
         cypher = bitarray()
         blockSize = int(keyLength / difficulty)
         blocks = Encryption.sliceToBlocks(message, blockSize)
         for block in blocks:
-            key = Encryption.keyDerivation(key, salt, keyLength)
-            cypher.extend(block ^ key[:block.length() * difficulty:difficulty])
+            blockKey = Encryption.keyDerivation(iteratorKey, blockSalt, keyLength)
+            iteratorKey = Encryption.keyDerivation(iteratorKey, iteratorSalt, keyLength)
+            cypher.extend(block ^ blockKey[:block.length() * difficulty:difficulty])
+        key = iteratorKey
         return cypher
 
     @staticmethod
