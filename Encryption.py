@@ -42,6 +42,7 @@ class Encryption:
 
     @staticmethod
     def keyDerivation(oldKey: bitarray, salt: bitarray, length: int) -> bitarray:
+        # TODO use HKDF
         newKey = bitarray()
         saltedKey = oldKey
         saltedKey.extend(salt)

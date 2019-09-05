@@ -1,6 +1,6 @@
 # Hashed-XOR-Encryption
 
-The concept behind this encryption you can find [here](Concept.md).
+The concept behind this encryption you can find [here](docs/Concept.md).
 
 ## Usage
 
